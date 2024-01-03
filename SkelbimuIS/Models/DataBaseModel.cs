@@ -89,6 +89,51 @@ namespace SkelbimuIS.Models
             return null;
         }
 
+        public int addAd(Ad ad)
+        {
+            string pavadinimas = ad.pavadinimas;
+            string numeris = ad.numeris;
+            string pastas = ad.pastas;
+            string aprasas = ad.aprasas;
+            decimal kaina = ad.kaina;
+            decimal ivertis = ad.ivertis;
+            decimal reputacija = ad.reputacija;
+            string miestas = ad.miestas;
+            int perziuros = ad.perziuros;
+            DateTime data = ad.data;
+            bool megst = ad.megst;
+            int pardId = ad.pardavejoId;
+            string kategorija = ad.kategorija;
+
+            Console.WriteLine(pavadinimas);
+
+            string sqlQuery = $"INSERT INTO ad (pavadinimas, numeris, pastas, aprasas, kaina, ivertis, reputacija, miestas, perziuros, megst, pardId, kategorija) " +
+                $"VALUES ('{pavadinimas}', '{numeris}', '{pastas}', '{aprasas}', '{kaina}', '{ivertis}', '{reputacija}', '{miestas}', '{perziuros}', '{megst}', '{pardId}', '{kategorija}');";
+
+            using (MySqlCommand command = new MySqlCommand(sqlQuery, connection))
+            {
+                command.Parameters.AddWithValue("pavadinimas", pavadinimas);
+                command.Parameters.AddWithValue("numeris", numeris);
+                command.Parameters.AddWithValue("pastas", pastas);
+                command.Parameters.AddWithValue("aprasas", aprasas);
+                command.Parameters.AddWithValue("kaina", kaina);
+                command.Parameters.AddWithValue("ivertis", ivertis);
+                command.Parameters.AddWithValue("reputacija", reputacija);
+                command.Parameters.AddWithValue("miestas", miestas);
+                command.Parameters.AddWithValue("perziuros", perziuros);
+                command.Parameters.AddWithValue("megst", megst);
+                command.Parameters.AddWithValue("pardId", pardId);
+                command.Parameters.AddWithValue("kategorija", kategorija);
+
+                command.ExecuteNonQuery();
+
+                command.CommandText = "SELECT LAST_INSERT_ID();";
+                int lastInsertedId = Convert.ToInt32(command.ExecuteScalar());
+
+                return lastInsertedId;
+            }
+        }
+
         //not used
         public List<Message> getAllMessages()
         {
