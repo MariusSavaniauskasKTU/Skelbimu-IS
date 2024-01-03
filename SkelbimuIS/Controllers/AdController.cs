@@ -40,16 +40,20 @@ namespace SkelbimuIS.Controllers
             return View();
         }
 
-        public IActionResult ViewAd()
+        public IActionResult ViewAd(int AdId)
         {
-            return View();
+            Ad Model = database.getAdById(AdId);
+            Console.WriteLine(AdId.ToString());
+            if (Model == null) {
+                Console.WriteLine("Riau");
+            }
+            return View("ViewAd", Model);
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
             List<Ad> ads = database.getAllAds();
-            Console.WriteLine("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
             return View(ads);
         }
 

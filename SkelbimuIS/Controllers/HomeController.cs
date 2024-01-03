@@ -21,7 +21,6 @@ namespace SkelbimuIS.Controllers
         public IActionResult Index()
         {
             List<Ad> ads = database.getAllAds();
-            Console.WriteLine(ads.Capacity.ToString());
             return View(ads);
         }
 

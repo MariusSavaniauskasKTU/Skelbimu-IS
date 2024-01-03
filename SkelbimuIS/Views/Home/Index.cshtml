@@ -88,11 +88,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">@ad.pavadinimas</h5>
-                                <p class="card-text">@ad.aprasas</p>
+                                <p class="card-text"><strong>Ivertis:</strong> @ad.ivertis</p>
                                 <p class="card-text"><strong>Kategorija:</strong> @ad.kategorija</p>
                                 <p class="card-text"><strong>Kaina:</strong> @ad.kaina</p>
 
-                                <a href="@Url.Action("ViewAd", "Ad", new { id = ad.id })" class="btn btn-primary" role="button">Atidaryti</a>
+								<a class="btn btn-primary" asp-controller="Ad" asp-action="ViewAd" asp-route-AdId="@ad.id"> Atidaryti</a>
                                 <button class="btn btn-danger">Ištrinti</button>
                                 <button class="btn btn-warning">Pridėti į mėgstamus</button>
                                 <button class="btn btn-success">Įvertinti</button>

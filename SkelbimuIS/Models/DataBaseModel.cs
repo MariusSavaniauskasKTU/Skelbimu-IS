@@ -46,7 +46,6 @@ namespace SkelbimuIS.Models
                             pardavejoId = reader.GetInt32(12),
                             kategorija = reader.GetString(13)
                         };
-                        Console.WriteLine("ree");
                         ads.Add(ad);
                     }
                 }
@@ -54,6 +53,41 @@ namespace SkelbimuIS.Models
             return ads;
         }
 
+        internal Ad getAdById(int adId)
+        {
+            string sqlQuery = "SELECT * FROM ad WHERE id=@adId";
+
+            using (MySqlCommand command = new MySqlCommand(sqlQuery, connection))
+            {
+                command.Parameters.AddWithValue("@adId", adId);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Ad ad = new Ad
+                        {
+                            id = reader.GetInt32(0),
+                            pavadinimas = reader.GetString(1),
+                            numeris = reader.GetString(2),
+                            pastas = reader.GetString(3),
+                            aprasas = reader.GetString(4),
+                            kaina = reader.GetDecimal(5),
+                            ivertis = reader.GetDecimal(6),
+                            reputacija = reader.GetDecimal(7),
+                            miestas = reader.GetString(8),
+                            perziuros = reader.GetInt32(9),
+                            data = reader.GetDateTime(10),
+                            megst = reader.GetBoolean(11),
+                            pardavejoId = reader.GetInt32(12),
+                            kategorija = reader.GetString(13)
+                        };
+                        return ad;
+                    }
+                }
+            }
+            return null;
+        }
 
         //not used
         public List<Message> getAllMessages()
